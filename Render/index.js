@@ -12,16 +12,12 @@ class Render {
         window.store = new Data();
         window.logic = new Logic(this.canv.width, this.canv.height);
         window.components = new Components();
-        window.startTime = new Date();
-        window.ticks = new Date() - startTime;
+        window.startTime = Date.now();
+        window.ticks = Date.now() - startTime;
 
 
         for(let i = 0; i < logic.CanvHandlers.length; i++) {
             this.canv.addEventListener(logic.CanvHandlers[i], logic.EvtHandler)
-        }
-
-        for(let i in components.components) {
-            store.renders.push(components.components[i]);
         }
 
         this.loop();
@@ -29,33 +25,33 @@ class Render {
 
 
     loop() {
-        window.ticks = new Date() - startTime;
+        window.ticks = Date.now() - startTime;
 
         //temp//
         logic.WorldViewVisible.x = parseInt(ticks/5);
         //end temp//
 
-        this.ctx.clearRect(0, 0, this.canv.width, this.canv.height);
+        this.canv.width = this.canv.width;
 
         store.renders.map(_ => {
-            if(_.type !== "static") _.generate()
+          if(_.type !== "static") _.generate()
         });
-
-        store.renders.sort((a, b) => a.order - b.order);
 
         let toRender = store.renders.filter(_ => { //only render visible
             if(_.level !== logic.level) return false;
 
             let vw = logic.WorldViewVisible;
             let minX = _.worldX || _.x || 0;
-            let maxX = _.worldX + _.canvas.width || _.x + _.canvas.width;
+            let maxX = _.worldX + _.width || _.x + _.width;
             let minY = _.worldY || _.y || 0;
-            let maxY = _.worldY + _.canvas.height || _.y + _.canvas.height;
+            let maxY = _.worldY + _.height || _.y + _.height;
             let inX = maxX >= vw.x && minX <= (vw.x + vw.width);
             let inY = maxY >= vw.y && minY <= (vw.y + vw.height);
 
             return inX && inY;
         })
+
+        toRender.sort((a, b) => a.order - b.order);
 
         for(let i = 0; i < toRender.length; i++) {
             let obj = toRender[i];
@@ -64,8 +60,8 @@ class Render {
                 obj.canvas,
                 obj.x || obj.worldX - logic.WorldViewVisible.x,
                 obj.y || obj.worldY - logic.WorldViewVisible.y,
-                obj.width || obj.canvas.width,
-                obj.height || obj.canvas.height
+                obj.width,
+                obj.height
             );
         }
 

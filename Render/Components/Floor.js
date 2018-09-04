@@ -4,8 +4,10 @@ class Floor {
         this.level = level;
         this.canvas = document.createElement("canvas");
         this.type = "static";
-        this.canvas.width = w;
-        this.canvas.height = h;
+        this.width = w;
+        this.height = h;
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
         this.collision = true;
         this.worldX = x;
         this.worldY = y;

@@ -3,8 +3,10 @@ class Background1 {
         this.canvas = document.createElement("canvas");
         this.type = "static";
         this.level = "Level0";
-        this.canvas.width = 4000;
-        this.canvas.height = 700;
+        this.width = 4000;
+        this.height = 700;
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
         this.worldY = 0;
         this.collision = false;
         this.ctx = this.canvas.getContext("2d");
@@ -14,19 +16,19 @@ class Background1 {
         let gOpt2 = [130, 150, 155];
 
         let i = 0;
-        for(let y = 0; y < this.canvas.height; y+=2) {
-          for(let x = 0; x < this.canvas.width; x+=4) {
-            let sky = y*100/this.canvas.height < 45 + Math.sin(x/80)*2;
+        for(let y = 0; y < this.height; y+=2) {
+          for(let x = 0; x < this.width; x+=4) {
+            let sky = y*100/this.height < 45 + Math.sin(x/80)*2;
             if(sky){
               let r = 12;
               let g = gOpt1[i%gOpt1.length];
-              let b = 255 - parseInt(y / this.canvas.height * 125);
+              let b = 255 - parseInt(y / this.height * 125);
               this.ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
               this.ctx.fillRect(x, y, 4, 2);
             } else {
               let r = 12;
               let g = gOpt2[i%gOpt2.length];
-              let b = parseInt(y / this.canvas.height * 75);
+              let b = parseInt(y / this.height * 75);
               this.ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
               this.ctx.fillRect(x, y, 4, 2);
             }
@@ -59,7 +61,7 @@ class Background1 {
 
     getBg(i) {
       this.id = "bg1-" + i;
-      this.worldX = i * this.canvas.width;
+      this.worldX = i * this.width;
 
       return this;
     }

@@ -13,11 +13,11 @@ class Components {
 
         let level1 = new Level1();
 
-        for(let i in level1.components) this.addComponent(level1.components[i]);
+        for(let i in level1.components) store.renders.push(level1.components[i]);
 
         var bg1 = new Background1();
         for(let i = 0; i < 100; i++) {
-          this.addComponent(Object.assign({}, bg1.getBg(i)));
+          store.renders.push(Object.assign({}, bg1.getBg(i)));
         }
 
     }
