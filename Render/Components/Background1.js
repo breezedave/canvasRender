@@ -2,7 +2,7 @@ class Background1 {
     constructor() {
         this.canvas = document.createElement("canvas");
         this.type = "static";
-        this.level = "Level1";
+        this.level = "Level0";
         this.canvas.width = 4000;
         this.canvas.height = 700;
         this.worldY = 0;

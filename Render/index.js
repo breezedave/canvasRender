@@ -43,20 +43,22 @@ class Render {
 
         store.renders.sort((a, b) => a.order - b.order);
 
-        store.renders.filter(_ => {
+        let toRender = store.renders.filter(_ => { //only render visible
+            if(_.level !== logic.level) return false;
+
             let vw = logic.WorldViewVisible;
-            let minX = _.worldX || _.x;
+            let minX = _.worldX || _.x || 0;
             let maxX = _.worldX + _.canvas.width || _.x + _.canvas.width;
-            let minY = _.worldY || _.y;
+            let minY = _.worldY || _.y || 0;
             let maxY = _.worldY + _.canvas.height || _.y + _.canvas.height;
-            let inX = maxX >= vw.x || minX <= vw.x + vw.width;
-            let inY = maxY >= vw.y || minY <= vw.y + vw.height;
+            let inX = maxX >= vw.x && minX <= (vw.x + vw.width);
+            let inY = maxY >= vw.y && minY <= (vw.y + vw.height);
 
             return inX && inY;
         })
 
-        for(let i = 0; i < store.renders.length; i++) {
-            let obj = store.renders[i];
+        for(let i = 0; i < toRender.length; i++) {
+            let obj = toRender[i];
 
             this.ctx.drawImage(
                 obj.canvas,
