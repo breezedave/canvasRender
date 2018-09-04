@@ -33,7 +33,7 @@ class Background1 {
               this.ctx.fillRect(x, y, 4, 2);
             }
             i += parseInt(Math.random() * 5 + 1)
-            if(!sky && i%2300 === 0) { //sheeps
+            if(!sky && i%2300 === 0 && x < this.width - 22 && x > 22) { //sheeps
                 this.ctx.fillStyle = "rgb(250, 255, 245)";
                 this.ctx.fillRect(x + 1, y - 16, 8, 4);
                 this.ctx.fillRect(x + 3, y - 18, 4, 8);
