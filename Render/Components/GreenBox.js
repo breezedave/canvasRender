@@ -9,6 +9,7 @@ class GreenBox {
         this.w = w;
         this.h = h;
         this.ctx = this.canvas.getContext("2d");
+        this.order = 3;
     };
 
     generate() {

@@ -11,6 +11,7 @@ class Floor {
         this.worldY = y;
         this.ctx = this.canvas.getContext("2d");
         this.ctx.fillStyle = "black";
+        this.order = 1;
 
         let img = new Image();
         img.src = "/Resources/floor.jpg";

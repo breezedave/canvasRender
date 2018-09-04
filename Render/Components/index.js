@@ -1,6 +1,7 @@
 import BlueBox from "./BlueBox.js";
 import GreenBox from "./GreenBox.js";
 import Level1 from "./Level1.js";
+import Background1 from "./Background1.js";
 
 class Components {
     constructor() {
@@ -13,6 +14,11 @@ class Components {
         let level1 = new Level1();
 
         for(let i in level1.components) this.addComponent(level1.components[i]);
+
+        var bg1 = new Background1();
+        for(let i = 0; i < 100; i++) {
+          this.addComponent(Object.assign({}, bg1.getBg(i)));
+        }
 
     }
 

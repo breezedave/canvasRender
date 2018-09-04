@@ -5,7 +5,7 @@ import Logic from "../Logic/index.js";
 class Render {
     constructor(selector) {
         this.canv = document.querySelector(selector);
-        this.canv.width = 800;
+        this.canv.width = 1600;
         this.canv.height = 600;
         this.ctx = this.canv.getContext("2d", {alpha: false});
 
@@ -33,16 +33,15 @@ class Render {
 
         //temp//
         logic.WorldViewVisible.x = parseInt(ticks/5);
-        logic.WorldViewVisible.y = parseInt(Math.sin(ticks/500%90)*20);
         //end temp//
 
-
-        this.ctx.fillStyle = "rgb(220,120,20)";
-        this.ctx.fillRect(0, 0, this.canv.width, this.canv.height);
+        this.ctx.clearRect(0, 0, this.canv.width, this.canv.height);
 
         store.renders.map(_ => {
             if(_.type !== "static") _.generate()
         });
+
+        store.renders.sort((a, b) => a.order - b.order);
 
         store.renders.filter(_ => {
             let vw = logic.WorldViewVisible;

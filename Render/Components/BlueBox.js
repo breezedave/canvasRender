@@ -10,6 +10,7 @@ class BlueBox {
         this.ctx = this.canvas.getContext("2d");
         this.ctx.fillStyle = "blue";
         this.ctx.fillRect(0, 0, w, h);
+        this.order = 2;
     };
 };
 
