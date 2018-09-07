@@ -28,7 +28,7 @@ class Render {
         window.ticks = Date.now() - startTime;
 
         //temp//
-        logic.WorldViewVisible.x = parseInt(ticks/5);
+        //logic.WorldViewVisible.x = parseInt(ticks/5);
         //end temp//
 
         this.canv.width = this.canv.width;
