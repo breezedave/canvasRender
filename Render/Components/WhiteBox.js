@@ -1,13 +1,13 @@
-class BlueBox{
+class WhiteBox{
     constructor(id, w, h) {
         this.physics = {
             enabled: true,
             collision: true,
             gravity: 9.8,
-            terminalVelocity: 50,
+            terminalVelocity: 40,
             velocityY: -9, //going up
             bouncinessY: 0.5, //perc of energy passed back in to the bounce
-            velocityX: 50,
+            velocityX: 75,
             bouncinessX: 0.5
         };
 
@@ -20,11 +20,11 @@ class BlueBox{
         this.canvas.width = this.width;
         this.canvas.height = this.height;
         this.ctx = this.canvas.getContext("2d");
-        this.ctx.fillStyle = "blue";
+        this.ctx.fillStyle = "white";
         this.ctx.fillRect(0, 0, w, h);
         this.order = 2;
 
     };
 };
 
-export default BlueBox;
+export default WhiteBox;

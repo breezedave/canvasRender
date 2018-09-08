@@ -1,4 +1,4 @@
-import BlueBox from "../Render/Components/BlueBox.js";
+import WhiteBox from "../Render/Components/WhiteBox.js";
 
 class Logic {
     constructor(w, h) {
@@ -34,7 +34,7 @@ class Logic {
     Dispatch(msg) {
         switch (msg.type) {
             case "click":
-                let obj = new BlueBox("b", 20, 20);
+                let obj = new WhiteBox("ball", 6, 6);
 
                 obj.physics.worldX = logic.WorldViewVisible.x + msg.x;
                 obj.physics.worldY = logic.WorldViewVisible.y + msg.y;

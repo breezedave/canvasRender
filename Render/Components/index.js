@@ -1,4 +1,4 @@
-import BlueBox from "./BlueBox.js";
+import WhiteBox from "./WhiteBox.js";
 import GreenBox from "./GreenBox.js";
 import Level1 from "./Level1.js";
 import Background1 from "./Background1.js";
