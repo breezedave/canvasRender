@@ -1,16 +1,32 @@
+import Sheep from "./Sheep.js";
+import House from "./House.js";
+import Physics from "../../Logic/Physics.js";
+
 class Background1 {
     constructor() {
-        this.canvas = document.createElement("canvas");
+        this.sheep = new Sheep();
+        this.house = new House();
+        this.physics = new Physics();
+
+        this.width = 4000;
+        this.height = 600;
+        this.worldY = 0;
+        this.order = 0;
+        this.collision = false;
         this.type = "static";
         this.level = "Level0";
-        this.width = 4000;
-        this.height = 700;
+
+        this.canvas = document.createElement("canvas");
+        this.ctx = this.canvas.getContext("2d");
         this.canvas.width = this.width;
         this.canvas.height = this.height;
-        this.worldY = 0;
-        this.collision = false;
-        this.ctx = this.canvas.getContext("2d");
-        this.order = 0;
+
+        let houseBox = {
+            x: parseInt(Math.random() * 3850),
+            y: parseInt(Math.random() * 150 + 300),
+            width: 120,
+            height: 72
+        };
 
         let i = 0;
         for(let y = 0; y < this.height; y+=2) {
@@ -20,13 +36,25 @@ class Background1 {
                 this.drawSky(x, y, i);
             } else {
                 this.drawFloor(x, y, i);
-                if(i%2300 === 0 && x < this.width - 22 && x > 22) { //sheeps
-                    //this.addSheep(x, y);
-                }
-                //if(i%10000 === 0 && x < this.width - 22 && x > 22) { //sheeps
-                    this.addHouse(100, 600);
-                //}
             }
+            i += parseInt(Math.random() * 5 + 1);
+          }
+        }
+        this.house.addHouse(this.ctx, houseBox.x, houseBox.y);
+        for(let y = 0; y < this.height; y+=2) {
+          for(let x = 0; x < this.width; x+=4) {
+            let sky = y*100/this.height < 45 + Math.sin(x/80)*2;
+            let sheepBox = Object.assign({}, this.sheep);
+
+            sheepBox.x = x;
+            sheepBox.y = y;
+            if(
+                !sky &&
+                i%2300 === 0 &&
+                x < this.width - this.sheep.width &&
+                x > this.sheep.width &&
+                !this.physics.Overlaps(sheepBox, houseBox)
+            )  this.sheep.addSheep(this.ctx, x, y - 18);
             i += parseInt(Math.random() * 5 + 1);
           }
         }
@@ -48,51 +76,6 @@ class Background1 {
         let b = parseInt(y / this.height * 75);
         this.ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
         this.ctx.fillRect(x, y, 4, 2);
-    }
-
-    addSheep(x, y) {
-        this.ctx.fillStyle = "rgb(250, 255, 245)";
-        this.ctx.fillRect(x    , y - 16, 8, 4);
-        this.ctx.fillRect(x + 2, y - 18, 4, 8);
-
-        this.ctx.fillRect(x + 4, y - 13, 12, 6);
-        this.ctx.fillRect(x + 7, y - 16, 6, 12);
-
-        this.ctx.fillRect(x + 10, y - 13, 12, 6);
-        this.ctx.fillRect(x + 14, y - 16, 6, 12);
-
-        this.ctx.fillStyle = "rgb(96, 80, 66)";
-        this.ctx.fillRect(x + 9 , y - 4, 2, 4);
-        this.ctx.fillRect(x + 15, y - 4, 2, 4);
-
-        this.ctx.fillStyle = "rgb(125, 125, 125)";
-        this.ctx.fillRect(x + 2 , y - 16, 2, 2);
-
-        this.ctx.fillStyle = "rgb(215, 225, 235)";
-        this.ctx.fillRect(x + 14, y - 16, 1, 3);
-    }
-
-    addHouse(x, y) {
-        this.ctx.fillStyle = "black";
-        this.ctx.beginPath();
-        this.ctx.moveTo(x + 2, y - 40);
-        this.ctx.lineTo(x + 2, y - 78);
-        this.ctx.lineTo(x + 60, y - 118);
-        this.ctx.lineTo(x + 118, y - 78);
-        this.ctx.lineTo(x + 118, y - 40);
-        this.ctx.fill();
-
-        this.ctx.fillStyle = "white";
-        this.ctx.beginPath();
-        this.ctx.moveTo(x + 2  , y - 78);
-        this.ctx.lineTo(x + 0  , y - 78);
-        this.ctx.lineTo(x + 60 , y - 120);
-        this.ctx.lineTo(x + 120, y - 78);
-        this.ctx.lineTo(x + 118, y - 78);
-        this.ctx.lineTo(x + 60 , y - 118);
-        this.ctx.fill();
-
-
     }
 
     getBg(i) {
