@@ -1,6 +1,7 @@
 import Components from "./Components/index.js";
 import Data from "../Data/index.js";
 import Logic from "../Logic/index.js";
+import Physics from "../Logic/Physics.js";
 
 class Render {
     constructor(selector) {
@@ -11,6 +12,7 @@ class Render {
 
         window.store = new Data();
         window.logic = new Logic(this.canv.width, this.canv.height);
+        window.physics = new Physics();
         window.components = new Components();
         window.startTime = Date.now();
         window.ticks = Date.now() - startTime;
@@ -28,7 +30,7 @@ class Render {
         window.ticks = Date.now() - startTime;
 
         //temp//
-        //logic.WorldViewVisible.x = parseInt(ticks/5);
+        logic.WorldViewVisible.x = parseInt(ticks/5);
         //end temp//
 
         this.canv.width = this.canv.width;
@@ -39,12 +41,13 @@ class Render {
 
         let toRender = store.renders.filter(_ => { //only render visible
             if(_.level !== logic.level) return false;
+            let worldX =  _.worldX;
 
             let vw = logic.WorldViewVisible;
-            let minX = _.worldX || _.x || 0;
-            let maxX = _.worldX + _.width || _.x + _.width;
-            let minY = _.worldY || _.y || 0;
-            let maxY = _.worldY + _.height || _.y + _.height;
+            let minX = _.physics.worldX || _.worldX || _.x || 0;
+            let maxX = (_.physics.worldX || _.worldX) + _.width || _.x + _.width;
+            let minY = _.physics.worlY || _.worldY || _.y || 0;
+            let maxY = (_.physics.worldY || _.worldY) + _.height || _.y + _.height;
             let inX = maxX >= vw.x && minX <= (vw.x + vw.width);
             let inY = maxY >= vw.y && minY <= (vw.y + vw.height);
 
@@ -56,13 +59,24 @@ class Render {
         for(let i = 0; i < toRender.length; i++) {
             let obj = toRender[i];
 
-            this.ctx.drawImage(
-                obj.canvas,
-                obj.x || obj.worldX - logic.WorldViewVisible.x,
-                obj.y || obj.worldY - logic.WorldViewVisible.y,
-                obj.width,
-                obj.height
-            );
+            if (obj.physics.enabled) {
+                physics.Process(obj);
+                this.ctx.drawImage(
+                    obj.canvas,
+                    obj.physics.worldX - logic.WorldViewVisible.x,
+                    obj.physics.worldY - logic.WorldViewVisible.y,
+                    obj.width,
+                    obj.height
+                );
+            } else {
+                this.ctx.drawImage(
+                    obj.canvas,
+                    obj.x || obj.worldX - logic.WorldViewVisible.x,
+                    obj.y || obj.worldY - logic.WorldViewVisible.y,
+                    obj.width,
+                    obj.height
+                );
+            }
         }
 
         let callback = this.loop.bind(this);

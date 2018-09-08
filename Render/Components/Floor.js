@@ -1,5 +1,11 @@
 class Floor {
     constructor(id, level, x, y, w, h) {
+        this.physics = {
+            enabled: true,
+            collision: true,
+            gravity: 0
+        };
+
         this.id = id;
         this.level = level;
         this.canvas = document.createElement("canvas");

@@ -6,11 +6,7 @@ import Background1 from "./Background1.js";
 class Components {
     constructor() {
         this.components = {};
-
-        this.addComponent(new BlueBox("b", 1, 2));
-        this.addComponent(new BlueBox("bl", 10, 10));
-        this.addComponent(new GreenBox("g", 20, 20));
-
+    
         let level1 = new Level1();
 
         for(let i in level1.components) store.renders.push(level1.components[i]);

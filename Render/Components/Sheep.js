@@ -1,5 +1,9 @@
 class Sheep {
     constructor() {
+        this.physics = {
+            enabled: false
+        };
+
         let canv = document.createElement("canvas");
         let ctx = canv.getContext("2d");
 

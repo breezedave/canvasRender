@@ -1,5 +1,11 @@
 class GreenBox {
     constructor(id, w, h) {
+        this.physics = {
+            enabled: true,
+            collision: false,
+            gravity: 0
+        };
+
         this.id = id;
         this.startTick = false;
         this.level = logic.level;

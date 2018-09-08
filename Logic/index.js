@@ -1,3 +1,4 @@
+import BlueBox from "../Render/Components/BlueBox.js";
 
 class Logic {
     constructor(w, h) {
@@ -32,6 +33,13 @@ class Logic {
 
     Dispatch(msg) {
         switch (msg.type) {
+            case "click":
+                let obj = new BlueBox("b", 20, 20);
+
+                obj.physics.worldX = logic.WorldViewVisible.x + msg.x;
+                obj.physics.worldY = logic.WorldViewVisible.y + msg.y;
+                store.renders.push(obj);
+                break;
             /*
             case "mousemove":
                 var comp = components.components["b"];

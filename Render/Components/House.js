@@ -1,5 +1,9 @@
 class House {
     constructor() {
+        this.physics = {
+            enabled: false
+        };
+
         this.canvas = document.createElement("canvas");
         this.ctx = this.canvas.getContext("2d");
 
