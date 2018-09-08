@@ -5,7 +5,7 @@ class Logic {
         this.w = w;
         this.h = h;
         this.CanvHandlers = canvHandlers;
-        this.level = "Level0";
+        this.level = "Level1";
         this.WorldViewVisible = {
             x: 0,
             y: 0,

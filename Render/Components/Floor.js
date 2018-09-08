@@ -3,7 +3,9 @@ class Floor {
         this.physics = {
             enabled: true,
             collision: true,
-            gravity: 0
+            gravity: 0,
+            worldX: x,
+            worldY: y
         };
 
         this.id = id;
@@ -15,19 +17,11 @@ class Floor {
         this.canvas.width = this.width;
         this.canvas.height = this.height;
         this.collision = true;
-        this.worldX = x;
-        this.worldY = y;
         this.ctx = this.canvas.getContext("2d");
         this.ctx.fillStyle = "black";
         this.order = 1;
 
-        let img = new Image();
-        img.src = "/Resources/floor.jpg";
-
-        var self = this;
-        img.onload = function() {
-            self.ctx.drawImage(img, 0, 0, w, h, 0, 0, w, h);
-        }
+        this.ctx.fillRect(0, 0, w, h);
     };
 };
 

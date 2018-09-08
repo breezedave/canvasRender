@@ -12,7 +12,6 @@ class Render {
 
         window.store = new Data();
         window.logic = new Logic(this.canv.width, this.canv.height);
-        window.physics = new Physics();
         window.components = new Components();
         window.startTime = Date.now();
         window.ticks = Date.now() - startTime;
@@ -30,7 +29,7 @@ class Render {
         window.ticks = Date.now() - startTime;
 
         //temp//
-        logic.WorldViewVisible.x = parseInt(ticks/5);
+        //logic.WorldViewVisible.x = parseInt(ticks/5);
         //end temp//
 
         this.canv.width = this.canv.width;
@@ -55,6 +54,8 @@ class Render {
         })
 
         toRender.sort((a, b) => a.order - b.order);
+
+        let physics = new Physics(toRender);
 
         for(let i = 0; i < toRender.length; i++) {
             let obj = toRender[i];

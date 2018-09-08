@@ -2,10 +2,13 @@ class BlueBox{
     constructor(id, w, h) {
         this.physics = {
             enabled: true,
-            collision: false,
+            collision: true,
             gravity: 9.8,
             terminalVelocity: 50,
-            velocityY: -9 //going up
+            velocityY: -9, //going up
+            bouncinessY: 0.5, //perc of energy passed back in to the bounce
+            velocityX: 50,
+            bouncinessX: 0.5
         };
 
         this.id = id;

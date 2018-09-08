@@ -1,12 +1,10 @@
 import Sheep from "./Sheep.js";
 import House from "./House.js";
-import Physics from "../../Logic/Physics.js";
 
 class Background1{
     constructor() {
         this.sheep = new Sheep();
         this.house = new House();
-        this.overlapLogic = new Physics();
         this.physics = {
             enabled: false
         };
@@ -16,7 +14,7 @@ class Background1{
         this.worldY = 0;
         this.order = 0;
         this.type = "static";
-        this.level = "Level0";
+        this.level = "Level1";
 
         this.canvas = document.createElement("canvas");
         this.ctx = this.canvas.getContext("2d");
@@ -55,7 +53,7 @@ class Background1{
                 i%2300 === 0 &&
                 x < this.width - this.sheep.width &&
                 x > this.sheep.width &&
-                !this.overlapLogic.Overlaps(sheepBox, houseBox)
+                !this.overlaps(sheepBox, houseBox)
             )  this.sheep.addSheep(this.ctx, x, y - 18);
             i += parseInt(Math.random() * 5 + 1);
           }
@@ -78,6 +76,13 @@ class Background1{
         let b = parseInt(y / this.height * 75);
         this.ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
         this.ctx.fillRect(x, y, 4, 2);
+    }
+
+    overlaps(a, b) {
+        return a.x + a.width > b.x &&
+        a.x < b.x + b.width &&
+        a.y + a.height > b.y &&
+        a.y < b.y + b.height;
     }
 
     getBg(i) {
