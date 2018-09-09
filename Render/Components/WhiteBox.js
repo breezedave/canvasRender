@@ -4,7 +4,7 @@ class WhiteBox{
             enabled: true,
             collision: true,
             gravity: 9.8,
-            terminalVelocity: 40,
+            terminalVelocity: 10,
             velocityY: -9, //going up
             bouncinessY: 0.5, //perc of energy passed back in to the bounce
             velocityX: 75,
