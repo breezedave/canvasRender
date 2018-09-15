@@ -7,7 +7,7 @@ class Logic {
         this.CanvHandlers = canvHandlers;
         this.level = "Level1";
         this.WorldViewVisible = {
-            x: 0,
+            x: 2000,
             y: 0,
             width: w,
             height: h
@@ -25,7 +25,8 @@ class Logic {
             y: y,
             type: e.type,
             ctrlKey: e.ctrlKey,
-            shiftKey: e.shiftKey
+            shiftKey: e.shiftKey,
+            keyCode: e.keyCode
         };
 
         logic.Dispatch(msg);
@@ -34,11 +35,27 @@ class Logic {
     Dispatch(msg) {
         switch (msg.type) {
             case "click":
-                let obj = new WhiteBox("ball", 6, 6);
+                let obj = new WhiteBox("ball", 8, 8);
 
                 obj.physics.worldX = logic.WorldViewVisible.x + msg.x;
                 obj.physics.worldY = logic.WorldViewVisible.y + msg.y;
                 store.renders.push(obj);
+                break;
+            case "keydown":
+                switch(msg.keyCode) {
+                    case 39:
+                        logic.WorldViewVisible.x += 5;
+                        break;
+                    case 37:
+                        logic.WorldViewVisible.x -= 5;
+                        break;
+                    case 40:
+                        logic.WorldViewVisible.y += 5;
+                        break;
+                    case 38:
+                        logic.WorldViewVisible.y -= 5;
+                        break;
+                }
                 break;
             /*
             case "mousemove":
@@ -84,7 +101,10 @@ const canvHandlers = [
     "dragenter",
     "dragover",
     "dragleave",
-    "drop"
+    "drop",
+    "keydown",
+    "keypress",
+    "input"
 ];
 
 export default Logic;

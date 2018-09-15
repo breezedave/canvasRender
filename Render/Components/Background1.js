@@ -21,9 +21,12 @@ class Background1{
         this.canvas.width = this.width;
         this.canvas.height = this.height;
 
+        let skylinePect = 55;
+
+        let houseX = parseInt(Math.random() * 3000) + 2000
         let houseBox = {
-            x: parseInt(Math.random() * 3850),
-            y: parseInt(Math.random() * 150 + 300),
+            x: houseX,
+            y: parseInt(this.height / 100 * skylinePect + Math.sin(houseX / 80) * 2) - 50,
             width: 120,
             height: 85
         };
@@ -31,7 +34,7 @@ class Background1{
         let i = 0;
         for(let y = 0; y < this.height; y+=2) {
           for(let x = 0; x < this.width; x+=4) {
-            let sky = y*100/this.height < 45 + Math.sin(x/80)*2;
+            let sky = y*100/this.height < skylinePect + Math.sin(x/80)*2;
             if(sky){
                 this.drawSky(x, y, i);
             } else {
@@ -43,7 +46,7 @@ class Background1{
         this.house.addHouse(this.ctx, houseBox.x, houseBox.y);
         for(let y = 0; y < this.height; y+=2) {
           for(let x = 0; x < this.width; x+=4) {
-            let sky = y*100/this.height < 45 + Math.sin(x/80)*2;
+            let sky = y*100/this.height < skylinePect + Math.sin(x/80)*2;
             let sheepBox = Object.assign({}, this.sheep);
 
             sheepBox.x = x;

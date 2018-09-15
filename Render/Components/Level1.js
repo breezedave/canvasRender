@@ -4,16 +4,14 @@ class Level1 {
     constructor () {
         this.components = [];
 
-        this.components.push(new Floor("l1f1","Level1", 0, 500, 200, 25));
-        this.components.push(new Floor("l1f2","Level1", 250, 400, 200, 25));
-        this.components.push(new Floor("l1f3","Level1", 420, 500, 100, 15));
-        this.components.push(new Floor("l1f4","Level1", 550, 600, 200, 25));
-        this.components.push(new Floor("l1f5","Level1", 750, 500, 250, 15));
-        this.components.push(new Floor("l1f6","Level1", 1050, 400, 150, 25));
-        this.components.push(new Floor("l1f7","Level1", 1200, 450, 30, 25));
-        this.components.push(new Floor("l1f8","Level1", 1250, 300, 100, 5));
-        this.components.push(new Floor("l1f9","Level1", 1350, 400, 200, 25));
-        this.components.push(new Floor("l1f10","Level1", 1500, 500, 300, 15));
+        this.components.push(new Floor("l1f7","Level1", 4350, -1, 2000, 601));
+        this.components.push(new Floor("l1f6","Level1", 3950, 300, 400, 300));
+        this.components.push(new Floor("l1f5","Level1", 3300, 350, 600, 250));
+        this.components.push(new Floor("l1f4","Level1", 2700, 400, 540, 200));
+        this.components.push(new Floor("l1f3","Level1", 2600, 440, 100, 160));
+        this.components.push(new Floor("l1f2","Level1", 2000, 400, 600, 200));
+        this.components.push(new Floor("l1f1","Level1", -1, -1, 2001, 601));
+
     }
 }
 

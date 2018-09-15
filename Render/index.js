@@ -18,7 +18,7 @@ class Render {
 
 
         for(let i = 0; i < logic.CanvHandlers.length; i++) {
-            this.canv.addEventListener(logic.CanvHandlers[i], logic.EvtHandler)
+            this.canv.addEventListener(logic.CanvHandlers[i], logic.EvtHandler, false)
         }
 
         this.loop();
