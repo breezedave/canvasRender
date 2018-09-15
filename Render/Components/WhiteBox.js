@@ -22,7 +22,7 @@ class WhiteBox{
         this.ctx = this.canvas.getContext("2d");
         this.ctx.fillStyle = "white";
         this.ctx.fillRect(0, 0, w, h);
-        this.order = 2;
+        this.order = 4;
 
     };
 };
