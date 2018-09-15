@@ -22,6 +22,8 @@ class Player {
         this.canvas.height = this.height;
         this.ctx = this.canvas.getContext("2d");
         this.order = 3;
+        this.speed = 120;
+        this.jump = 6.5;
 
         this.Render();
         window.player = this;

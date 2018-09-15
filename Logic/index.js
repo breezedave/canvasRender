@@ -75,7 +75,7 @@ class Logic {
                         player.direction = -1;
                         break;
                         case 38:
-                        if(!player.physics.velocityY) player.physics.velocityY = -5;
+                        if(!player.physics.velocityY) player.physics.velocityY = player.jump * -1;
                         break;
                     }
                 }

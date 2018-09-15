@@ -32,7 +32,7 @@ class Render {
             let tmr = 6000;
             logic.WorldViewVisible.x = Math.sin(-1 + (ticks / tmr)) * 4000 + 4000;
         } else {
-            player.physics.velocityX = 60 * player.direction;
+            player.physics.velocityX = player.speed * player.direction;
             logic.WorldViewVisible.x = player.physics.worldX  - 400;
         }
 
