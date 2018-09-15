@@ -31,6 +31,9 @@ class Render {
         if(logic.level === "Level0") {
             let tmr = 6000;
             logic.WorldViewVisible.x = Math.sin(-1 + (ticks / tmr)) * 4000 + 4000;
+        } else {
+            player.physics.velocityX = 60 * player.direction;
+            logic.WorldViewVisible.x = player.physics.worldX  - 400;
         }
 
         this.canv.width = this.canv.width;

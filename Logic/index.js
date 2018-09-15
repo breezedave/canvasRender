@@ -7,7 +7,7 @@ class Logic {
         this.h = h;
         this.CanvHandlers = canvHandlers;
         this.level = "Level0";
-        this.editMode = true;
+        this.editMode = false;
         this.WorldViewVisible = {
             x: 0,
             y: 0,
@@ -66,28 +66,32 @@ class Logic {
                         logic.WorldViewVisible.y -= 5;
                         break;
                     }
+                } else {
+                    switch(msg.keyCode) {
+                        case 39:
+                        player.direction = 1;
+                        break;
+                        case 37:
+                        player.direction = -1;
+                        break;
+                        case 38:
+                        if(!player.physics.velocityY) player.physics.velocityY = -5;
+                        break;
+                    }
                 }
                 break;
-            /*
-            case "mousemove":
-                var comp = components.components["b"];
-                var obj = Object.assign({}, comp);
-                for(let i in comp) obj[i] = comp[i];
-
-                obj.x = msg.x;
-                obj.y = msg.y;
-                store.renders.push(obj);
+            case "keyup":
+                if(!this.editMode) {
+                    switch(msg.keyCode) {
+                        case 39:
+                        player.direction = 0;
+                        break;
+                        case 37:
+                        player.direction = 0;
+                        break;
+                    }
+                }
                 break;
-            case "click":
-                var comp = components.components["g"];
-                var obj = Object.assign({}, comp);
-
-                obj.generate = comp.generate;
-                obj.x = msg.x;
-                obj.y = msg.y;
-                store.renders.push(obj);
-                break;
-            */
         }
     }
 };
@@ -115,6 +119,7 @@ const canvHandlers = [
     "drop",
     "keydown",
     "keypress",
+    "keyup",
     "input"
 ];
 
