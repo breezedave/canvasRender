@@ -28,9 +28,10 @@ class Render {
     loop() {
         window.ticks = Date.now() - startTime;
 
-        //temp//
-        //logic.WorldViewVisible.x = parseInt(ticks/5);
-        //end temp//
+        if(logic.level === "Level0") {
+            let tmr = 6000;
+            logic.WorldViewVisible.x = Math.sin(ticks / tmr) * 4000 + 4000;
+        }
 
         this.canv.width = this.canv.width;
 

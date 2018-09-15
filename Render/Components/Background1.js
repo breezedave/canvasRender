@@ -2,7 +2,7 @@ import Sheep from "./Sheep.js";
 import House from "./House.js";
 
 class Background1{
-    constructor() {
+    constructor(level) {
         this.sheep = new Sheep();
         this.house = new House();
         this.physics = {
@@ -14,7 +14,7 @@ class Background1{
         this.worldY = 0;
         this.order = 0;
         this.type = "static";
-        this.level = "Level1";
+        this.level = level;
 
         this.canvas = document.createElement("canvas");
         this.ctx = this.canvas.getContext("2d");

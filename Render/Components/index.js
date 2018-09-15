@@ -6,14 +6,19 @@ import Background1 from "./Background1.js";
 class Components {
     constructor() {
         this.components = {};
-    
+
         let level1 = new Level1();
 
         for(let i in level1.components) store.renders.push(level1.components[i]);
 
-        var bg1 = new Background1();
-        for(let i = 0; i < 100; i++) {
-          store.renders.push(Object.assign({}, bg1.getBg(i)));
+        var bgLevel0 = new Background1("Level0");
+        for(let i = 0; i < 10; i++) {
+          store.renders.push(Object.assign({}, bgLevel0.getBg(i)));
+        }
+
+        var bgLevel1 = new Background1("Level1");
+        for(let i = 0; i < 10; i++) {
+          store.renders.push(Object.assign({}, bgLevel1.getBg(i)));
         }
 
     }

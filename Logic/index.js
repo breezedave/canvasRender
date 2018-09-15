@@ -5,7 +5,8 @@ class Logic {
         this.w = w;
         this.h = h;
         this.CanvHandlers = canvHandlers;
-        this.level = "Level1";
+        this.level = "Level0";
+        this.editMode = true;
         this.WorldViewVisible = {
             x: 2000,
             y: 0,
@@ -42,19 +43,21 @@ class Logic {
                 store.renders.push(obj);
                 break;
             case "keydown":
-                switch(msg.keyCode) {
-                    case 39:
+                if(this.editMode) {
+                    switch(msg.keyCode) {
+                        case 39:
                         logic.WorldViewVisible.x += 5;
                         break;
-                    case 37:
+                        case 37:
                         logic.WorldViewVisible.x -= 5;
                         break;
-                    case 40:
+                        case 40:
                         logic.WorldViewVisible.y += 5;
                         break;
-                    case 38:
+                        case 38:
                         logic.WorldViewVisible.y -= 5;
                         break;
+                    }
                 }
                 break;
             /*
