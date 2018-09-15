@@ -1,4 +1,5 @@
 import WhiteBox from "../Render/Components/WhiteBox.js";
+import Menu from "./Menu.js";
 
 class Logic {
     constructor(w, h) {
@@ -8,7 +9,7 @@ class Logic {
         this.level = "Level0";
         this.editMode = true;
         this.WorldViewVisible = {
-            x: 2000,
+            x: 0,
             y: 0,
             width: w,
             height: h
@@ -36,11 +37,18 @@ class Logic {
     Dispatch(msg) {
         switch (msg.type) {
             case "click":
-                let obj = new WhiteBox("ball", 8, 8);
+                if(logic.level === "Level1") {
+                    let obj = new WhiteBox("ball", 8, 8);
 
-                obj.physics.worldX = logic.WorldViewVisible.x + msg.x;
-                obj.physics.worldY = logic.WorldViewVisible.y + msg.y;
-                store.renders.push(obj);
+                    obj.physics.worldX = logic.WorldViewVisible.x + msg.x;
+                    obj.physics.worldY = logic.WorldViewVisible.y + msg.y;
+                    store.renders.push(obj);
+                } else {
+                    let menu = new Menu();
+                    let buttons = menu.GetButton(msg.x, msg.y);
+
+                    if(buttons.length > 0 ) buttons[0].Action();
+                }
                 break;
             case "keydown":
                 if(this.editMode) {

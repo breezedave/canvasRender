@@ -6,7 +6,7 @@ import Physics from "../Logic/Physics.js";
 class Render {
     constructor(selector) {
         this.canv = document.querySelector(selector);
-        this.canv.width = 1600;
+        this.canv.width = 1200;
         this.canv.height = 600;
         this.ctx = this.canv.getContext("2d", {alpha: false});
 
@@ -30,7 +30,7 @@ class Render {
 
         if(logic.level === "Level0") {
             let tmr = 6000;
-            logic.WorldViewVisible.x = Math.sin(ticks / tmr) * 4000 + 4000;
+            logic.WorldViewVisible.x = Math.sin(-1 + (ticks / tmr)) * 4000 + 4000;
         }
 
         this.canv.width = this.canv.width;
@@ -44,10 +44,12 @@ class Render {
             let worldX =  _.worldX;
 
             let vw = logic.WorldViewVisible;
-            let minX = _.physics.worldX || _.worldX || _.x || 0;
-            let maxX = (_.physics.worldX || _.worldX) + _.width || _.x + _.width;
-            let minY = _.physics.worlY || _.worldY || _.y || 0;
-            let maxY = (_.physics.worldY || _.worldY) + _.height || _.y + _.height;
+
+            if(_.x && _.y) return true;
+            let minX = _.physics.worldX || _.worldX || 0;
+            let maxX = (_.physics.worldX || _.worldX) + _.width;
+            let minY = _.physics.worlY || _.worldY || 0;
+            let maxY = (_.physics.worldY || _.worldY) + _.height;
             let inX = maxX >= vw.x && minX <= (vw.x + vw.width);
             let inY = maxY >= vw.y && minY <= (vw.y + vw.height);
 
